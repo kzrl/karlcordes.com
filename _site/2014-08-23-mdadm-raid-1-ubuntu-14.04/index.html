@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <title>Karl Cordes - </title>
+	<meta name="viewport" content="width=device-width">
+
+	
+	<link rel="stylesheet" href="/css/main.css">
+	<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>
+
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-44239010-1', 'karlcordes.com');
+	ga('send', 'pageview');
+
+	</script>
+
+</head>
+
+<body>
+
+<div class="container 2014-08-23-mdadm-raid-1-ubuntu-14.04">
+	<header class="top">
+		<h1><a href="/">Karl Cordes</a></h1>
+
+		<nav>
+
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li><a href="/cv">CV</a></li>
+				<li><a href="http://github.com/kzrl/">Github</a></li>
+				<li><a href="http://twitter.com/karl_c_cordes/">Twitter</a></li>
+			</ul>
+
+		</nav>
+
+	</header>
+
+	<div class="content">
+		<h1>Creating RAID 1 MDADM on an existing Ubuntu install</h1>
+
+<p>Remove all the old partions</p>
+
+<p>sudo parted</p>
+
+<p>select /dev/sda
+rm 1
+rm 2
+select /dev/sdb
+sudo mkfs.ext4 /dev/sd[a-d]1</p>
+
+<p>#Setup MDADM</p>
+
+<p>sudo mdadm &ndash;create &ndash;verbose /dev/md0 &ndash;level=mirror &ndash;raid-devices=2 /dev/sda1 /dev/sdb1</p>
+
+<p>karlcordes@spacex:~$ sudo mdadm &ndash;create &ndash;verbose /dev/md0 &ndash;level=mirror &ndash;raid-devices=2 /dev/sda1 /dev/sdb1
+mdadm: /dev/sda1 appears to contain an ext2fs file system
+size=1953513472K  mtime=Thu Jan  1 10:00:00 1970
+mdadm: Note: this array has metadata at the start and
+may not be suitable as a boot device.  If you plan to
+store &lsquo;/boot&rsquo; on this device please ensure that
+your boot-loader understands md/v1.x metadata, or use
+&ndash;metadata=0.90
+mdadm: /dev/sdb1 appears to contain an ext2fs file system
+size=1953513472K  mtime=Thu Jan  1 10:00:00 1970
+mdadm: size set to 1953382208K</p>
+
+<p>karlcordes@spacex:~$ sudo mdadm &ndash;create &ndash;verbose /dev/md1 &ndash;level=mirror &ndash;raid-devices=2 /dev/sdc1 /dev/sdd1
+mdadm: /dev/sdc1 appears to contain an ext2fs file system
+size=1953513472K  mtime=Thu Jan  1 10:00:00 1970
+mdadm: Note: this array has metadata at the start and
+may not be suitable as a boot device.  If you plan to
+store &lsquo;/boot&rsquo; on this device please ensure that
+your boot-loader understands md/v1.x metadata, or use
+&ndash;metadata=0.90
+mdadm: /dev/sdd1 appears to contain an ext2fs file system
+size=1953513472K  mtime=Thu Jan  1 10:00:00 1970
+mdadm: size set to 1953382208K
+Continue creating array? y
+mdadm: Defaulting to version 1.2 metadata
+mdadm: array /dev/md1 started.</p>
+
+<p>karlcordes@spacex:~$ cat /proc/mdstat
+Personalities : [linear] [multipath] [raid0] [raid1] [raid6] [raid5] [raid4] [raid10]
+md1 : active raid1 sdd1[1] sdc1[0]
+1953382208 blocks super 1.2 [<sup>2</sup>&frasl;<sub>2</sub>] [UU]
+[&gt;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..]  resync =  0.4% (<sup>8139008</sup>&frasl;<sub>1953382208</sub>) finish=243.9min speed=132882K/sec</p>
+
+<p>md0 : active raid1 sdb1[1] sda1[0]
+1953382208 blocks super 1.2 [<sup>2</sup>&frasl;<sub>2</sub>] [UU]
+[&gt;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..]  resync =  0.4% (<sup>9560128</sup>&frasl;<sub>1953382208</sub>) finish=253.9min speed=127572K/sec</p>
+
+<p>karlcordes@spacex:~$ cat /proc/mdstat
+Personalities : [linear] [multipath] [raid0] [raid1] [raid6] [raid5] [raid4] [raid10]
+md1 : active raid1 sdd1[1] sdc1[0]
+1953382208 blocks super 1.2 [<sup>2</sup>&frasl;<sub>2</sub>] [UU]
+[=&gt;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.]  resync =  7.2% (<sup>140990656</sup>&frasl;<sub>1953382208</sub>) finish=222.1min speed=135966K/sec</p>
+
+<p>md0 : active raid1 sdb1[1] sda1[0]
+1953382208 blocks super 1.2 [<sup>2</sup>&frasl;<sub>2</sub>] [UU]
+[=&gt;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.]  resync =  6.9% (<sup>136385792</sup>&frasl;<sub>1953382208</sub>) finish=239.9min speed=126214K/sec</p>
+
+<h2>Save the configuration</h2>
+
+<p>mdadm &ndash;detail &ndash;scan &gt;&gt; /etc/mdadm/mdadm.conf</p>
+
+<p>&ldquo;after you&rsquo;ve created your array, it&rsquo;s important to save the configuration in the proper mdadm configuration file. In Ubuntu, this is file /etc/mdadm/mdadm.conf. In some other distributions, this is file /etc/mdadm.conf. Check your distribution&rsquo;s documentation, or look at man mdadm.conf, to see what applies to your distribution.
+To save the configuration information:
+Ubuntu:</p>
+
+<p><a href="https://raid.wiki.kernel.org/index.php/RAID_setup#Saving_your_RAID_configuration">https://raid.wiki.kernel.org/index.php/RAID_setup#Saving_your_RAID_configuration</a></p>
+
+<p>Add to /etc/fstab
+/dev/md0  /mnt/io       ext4  noatime,rw 0 0
+/dev/md1  /mnt/europa   ext4  noatime,rw 0 0</p>
+
+	</div>
+
+
+
+</div> 
+
+</body>
+</html>
