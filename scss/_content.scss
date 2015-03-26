@@ -1,0 +1,43 @@
+
+
+.welcome {
+	img {
+		@extend .column-half;
+	}
+
+	article {
+		@extend .column-half;
+	}
+}
+
+
+
+header.top {
+
+	padding: 2em 1.5em 0em 1.5em; 
+
+	nav {
+
+		@extend %ul-horizontal;
+
+		a.active {
+			font-weight: bold;
+			font-size: 1.5em;
+		}
+	}
+
+}
+
+div.content {
+	padding: 0.5em 1.5em 1.5em 1.5em;
+	font-size: 1.25em;
+
+	p {
+		margin: 0 0 1em 0;
+	}
+}
+
+footer {
+	padding: $padding;
+	@extend %ul-horizontal;
+}

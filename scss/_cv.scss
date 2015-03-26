@@ -1,0 +1,204 @@
+div.cv {
+  header.top {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+}
+
+nav.back {
+  padding: 0.2em 0 0 1.5em;
+}
+
+article.cv {
+  padding: 0.5em 1.5em;
+  header {
+    h1 {
+      font-size: 2.3em;
+    }
+    h2 {
+      font-size: 1.4em;
+    }
+  }
+
+  section.contact {
+    dl {
+      @include span-columns(12);
+
+      $bottom: 0.5em;
+
+      dt {
+        @include span-columns(2);
+        margin: 0 0 $bottom 0;
+      }
+
+      dd {
+        @include span-columns(9);
+        margin: 0 0 $bottom 0;
+      }
+    }
+
+
+    @include media( $mobile ) {
+      dl {
+        @include fill-parent;
+
+        $bottom: 0.5em;
+
+        dt {
+          @include fill-parent;
+          margin: 0 0 $bottom 0;
+        }
+
+        dd {
+
+          @include fill-parent;
+          margin: 0 0 $bottom 0;
+        }
+      }
+
+    }
+
+
+  }
+
+  section.skills {
+    ul {
+      li {
+        display: inline;
+
+      }
+
+      li:after {
+        content: ',';
+      }
+
+      li:last-child:after {
+        content: '';
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 10px;
+    }
+  }
+
+  section {
+    @include span-columns(12);
+    h1 {
+      font-size: 1.8em;
+      @include span-columns(3);
+
+      @include media( $mobile ) {
+        @include fill-parent;
+      }
+    }
+    margin-bottom: 2em;
+
+    div {
+      @include shift(4);
+
+      @include media( $mobile ) {
+        @include shift(0);	
+      }
+
+      h1 {
+        font-size: 1.4em;
+        @include fill-parent;
+      }
+
+      h2 {
+        font-size: 1.2em;
+      }
+      h3 {
+        font-size: 1.1em;
+      }
+
+      span {
+        font-size: 1.1em;
+        font-style: italic;
+      }
+
+      &.workplace {
+        border-bottom: 1px solid;
+      }
+    }
+  }
+
+  table {
+    td {
+      padding: 0.5em 0.5em 0.5em 0;
+    }
+    tr.odd {
+      background-color: #CADAEA;
+    }
+  }
+
+  .printhack {
+    display: none;
+  }
+
+
+}
+
+@media print {
+
+  nav.back {
+    display: none;
+  }
+
+  article.cv {
+    padding: 0 !important;
+    font-size: 1em !important;
+
+    h1 {
+      font-size: 1.3em !important;	
+    }
+
+    h2 {
+      font-size: 1.2em !important;
+    }
+    h3 {
+      font-size: 1.1em !important;
+    }
+
+
+    section.skills {
+      h2 {
+        font-size: 1em !important;
+      }
+      ul {
+        li {
+          font-size: 0.8em;
+        }
+      }
+    }
+
+
+    section.experience {
+      page-break-before: always !important;
+    }
+
+    section.contact {
+      ul {
+        li {
+          display: inline;
+        }
+      }
+
+    }
+
+  }
+}
+
+
+
+
+
+

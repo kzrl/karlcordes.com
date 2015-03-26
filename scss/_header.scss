@@ -1,0 +1,30 @@
+header {
+
+	h1 {
+		
+		color: #120D5E;
+
+		a {
+			text-decoration: none;
+			font-size: 3em;
+			color: #120D5E;
+		}
+
+	}
+}
+header.top {
+
+	padding: 2em 1.5em 0em 1.5em; 
+
+	nav {
+
+		@extend %ul-horizontal;
+
+		a.active {
+			font-weight: bold;
+			font-size: 1.5em;
+		}
+	}
+
+}
+

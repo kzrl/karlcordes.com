@@ -1,0 +1,104 @@
+// Breakpoints.
+$desktop:  new-breakpoint( min-width 960px 12 );
+$tablet:   new-breakpoint( min-width 768px max-width 959px 12 );
+$mobile:   new-breakpoint( max-width 767px 12 );
+$handheld: new-breakpoint( max-width 959px 12 );
+
+$max-width: 960px;
+
+$padding: 1.5em 1.5em 1.5em 1.5em;
+body {
+	font-family: 'Libre Baskerville', serif;
+}
+
+a {
+	color: #08007F;
+}
+
+.hide {
+	display: none;
+}
+
+.row {
+	@include row;
+}
+
+.container {
+
+	@include outer-container;
+	&.medium { max-width: 960px; }
+	&.small  { max-width: 780px; }
+
+}
+
+%mobile-columns-shared {
+	@include media( $mobile ) {
+		width: 100% !important;
+	}
+}
+
+%ul-horizontal {
+	ul {
+		list-style: none;
+		li {
+			display: inline;
+			padding-right: 1.5em;
+			font-size: 1.2em;
+		}
+	}
+}
+
+/*	Thanks to @maikeldaloo for the breakpoints 
+and the column-* classes. */
+
+.column-full { @include fill-parent; }
+
+
+.column-half {
+	@include span-columns( 6 of 12 );
+	@include media($mobile) {
+		@include fill-parent;
+	}
+}
+
+.column-quarter { 
+	@include span-columns( 3 of 12 ); 
+}
+
+.column-three-quarters { 
+	@include span-columns( 9 of 12 ); 
+}
+
+.column-sixth {
+	@include span-columns( 2 of 12 );
+}
+
+.column-five-sixths {
+	@include span-columns ( 10 of 12 );
+}
+
+.responsive {
+	height: auto;
+	max-width: 100%;
+	width: 100%;
+}
+
+
+
+footer {
+
+}
+
+
+h1 {
+	font-size: 1.5em;
+}
+
+h2 {
+	font-size: 1.1em;
+}
+
+h3 {
+	font-size: 0.9em;
+}
+
