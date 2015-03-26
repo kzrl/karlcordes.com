@@ -85,12 +85,12 @@ article.cv {
     padding: 0;
 
     li {
-      margin-bottom: 10px;
+      margin-bottom: 0.5em;
     }
   }
 
   section {
-    @include span-columns(12);
+    @include fill-parent;
     h1 {
       font-size: 1.8em;
       @include span-columns(3);
@@ -128,8 +128,22 @@ article.cv {
       &.workplace {
         border-bottom: 1px solid;
       }
+      
     }
   }
+
+  .latest {
+    .workplace {
+      
+      ul {
+        li {
+          margin-bottom: 1.3em;
+        }
+      }
+    
+    }
+  }
+
 
   table {
     td {
@@ -152,6 +166,20 @@ article.cv {
   nav.back {
     display: none;
   }
+
+  .page {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+
+  .workplace {
+    border: none !important;
+  }
+
+  .border {
+    border-bottom: 1px solid !important;
+  }
+
 
   article.cv {
     padding: 0 !important;
@@ -182,7 +210,6 @@ article.cv {
 
 
     section.experience {
-      page-break-before: always !important;
     }
 
     section.contact {

@@ -1098,19 +1098,12 @@ article.cv ul {
 }
 /* line 87, scss/_cv.scss */
 article.cv ul li {
-  margin-bottom: 10px;
+  margin-bottom: 0.5em;
 }
 /* line 92, scss/_cv.scss */
 article.cv section {
-  display: block;
-  float: left;
-  margin-right: 2.35765%;
   width: 100%;
   margin-bottom: 2em;
-}
-/* line 41, scss/neat/grid/_span-columns.scss */
-article.cv section:last-child {
-  margin-right: 0;
 }
 /* line 94, scss/_cv.scss */
 article.cv section h1 {
@@ -1162,55 +1155,71 @@ article.cv section div span {
 article.cv section div.workplace {
   border-bottom: 1px solid;
 }
-/* line 135, scss/_cv.scss */
+/* line 139, scss/_cv.scss */
+article.cv .latest .workplace ul li {
+  margin-bottom: 1.3em;
+}
+/* line 149, scss/_cv.scss */
 article.cv table td {
   padding: 0.5em 0.5em 0.5em 0;
 }
-/* line 138, scss/_cv.scss */
+/* line 152, scss/_cv.scss */
 article.cv table tr.odd {
   background-color: #CADAEA;
 }
-/* line 143, scss/_cv.scss */
+/* line 157, scss/_cv.scss */
 article.cv .printhack {
   display: none;
 }
 
 @media print {
-  /* line 152, scss/_cv.scss */
+  /* line 166, scss/_cv.scss */
   nav.back {
     display: none;
   }
 
-  /* line 156, scss/_cv.scss */
+  /* line 170, scss/_cv.scss */
+  .page {
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+
+  /* line 175, scss/_cv.scss */
+  .workplace {
+    border: none !important;
+  }
+
+  /* line 179, scss/_cv.scss */
+  .border {
+    border-bottom: 1px solid !important;
+  }
+
+  /* line 184, scss/_cv.scss */
   article.cv {
     padding: 0 !important;
     font-size: 1em !important;
   }
-  /* line 160, scss/_cv.scss */
+  /* line 188, scss/_cv.scss */
   article.cv h1 {
     font-size: 1.3em !important;
   }
-  /* line 164, scss/_cv.scss */
+  /* line 192, scss/_cv.scss */
   article.cv h2 {
     font-size: 1.2em !important;
   }
-  /* line 167, scss/_cv.scss */
+  /* line 195, scss/_cv.scss */
   article.cv h3 {
     font-size: 1.1em !important;
   }
-  /* line 173, scss/_cv.scss */
+  /* line 201, scss/_cv.scss */
   article.cv section.skills h2 {
     font-size: 1em !important;
   }
-  /* line 177, scss/_cv.scss */
+  /* line 205, scss/_cv.scss */
   article.cv section.skills ul li {
     font-size: 0.8em;
   }
-  /* line 184, scss/_cv.scss */
-  article.cv section.experience {
-    page-break-before: always !important;
-  }
-  /* line 190, scss/_cv.scss */
+  /* line 217, scss/_cv.scss */
   article.cv section.contact ul li {
     display: inline;
   }
